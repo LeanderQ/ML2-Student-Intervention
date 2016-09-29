@@ -985,9 +985,11 @@ F1 score for test set: 0.8116.
 
 
 <span class="c1"># TODO: Initialize the classifier</span>
+<span class="c1">#NB passed the SAMME parameter because DecisionTreeClassifier didn&#39;t seem to work without it.</span>
 <span class="n">clf</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">AdaBoostClassifier</span><span class="p">(</span><span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;SAMME&#39;</span><span class="p">)</span>
 
 <span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
+<span class="c1">#NB I referred to this page for the correct syntax to use with the make_scorer function: http://stackoverflow.com/questions/34221712/grid-search-with-f1-as-scoring-function-several-pages-of-error-message</span>
 <span class="n">f1_scorer</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">make_scorer</span><span class="p">(</span><span class="n">f1_score</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
 
 <span class="c1"># TODO: Perform grid search on the classifier using the f1_scorer as the scoring method</span>
