@@ -284,7 +284,7 @@ div#notebook {
 <span class="n">n_students</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate number of features</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#subtracted 1 for the label</span>
 
 <span class="c1"># TODO: Calculate passing students</span>
 <span class="n">n_passed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="n">student_data</span><span class="o">.</span><span class="n">passed</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">])</span>
@@ -314,7 +314,7 @@ div#notebook {
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Total number of students: 395
-Number of features: 31
+Number of features: 30
 Number of students who passed: 265
 Number of students who failed: 130
 Graduation rate of the class: 67.09%
@@ -583,8 +583,8 @@ Testing set has 95 samples.
 <p>Logistic Regression
 Application: Churn prediction (e.g. <a href="http://www.lexjansen.com/nesug/nesug98/solu/p095.pdf">http://www.lexjansen.com/nesug/nesug98/solu/p095.pdf</a>)
 -Strengths: Linear regression is widely supported, implemented, and understood.  Logistic regression is just a subset of generalized linear models, so is easy to explain.  Has fewer assumptions than regular linear regression (e.g. normal distribution of error terms).  Gives a probability of the classification. 
-Weaknesses: Assumes a linear relationship between dependent variables and the transformed dependent variable.  Prone to overfitting.  Only models binary outcomes (without other modifications).
-Candidacy: we're predicting a pass/fail result, so binary limitation doesn't apply.</p>
+Weaknesses: Assumes a linear relationship between dependent variables and the transformed dependent variable.  Prone to overfitting.  Only models binary outcomes (without other modifications).  A large number of categorical factors can increase runtime dramatically.
+Candidacy: I think this would be a good option because having a probability of failure, instead of only having a pass/fail variable, could help teachers target the most at-risk students first.  The number of categorical features we have is not too many for the regression to handle well.</p>
 <p>Decision Trees:
 Application: Fraud detection (e.g. <a href="http://www.iaeng.org/publication/IMECS2011/IMECS2011_pp442-447.pdf">http://www.iaeng.org/publication/IMECS2011/IMECS2011_pp442-447.pdf</a>)
 Strengths: Easy to understand/interpret.  Can use categorical factors without transformation.
@@ -594,7 +594,7 @@ Candidacy: We have several categorical variables, which can be handled by trees.
 Application: image classification (e.g. <a href="http://www.uni-obuda.hu/journal/Markoski_Ivankovic_Ratgeber_Pecev_Glusac_57.pdf">http://www.uni-obuda.hu/journal/Markoski_Ivankovic_Ratgeber_Pecev_Glusac_57.pdf</a>)
 Strengths: considered to be a strong classifier, particularly when using decision trees (<a href="https://en.wikipedia.org/wiki/AdaBoost">https://en.wikipedia.org/wiki/AdaBoost</a>)
 Weaknesses: hard to interpret.
-Candicacy: fundamentally, we're more concerned with identifying problem students than knowing exactly why they may have the issue.</p>
+Candicacy: Per wikipedia, when decision trees are used as the weak learner, Adaboost focusses later trees on harder-to-classify examples.  These examples could be of particular interest to the teachers because they represent students who might be right at the pass/fail border.  Furthermore, given that we do not know which are the most relevant features, using decision trees in the adaboost algorithm helps us by ignoring irrelevant features (per <a href="https://storage.googleapis.com/supplemental_media/udacityu/5446988865/Intro%20to%20Boosting.pdf">https://storage.googleapis.com/supplemental_media/udacityu/5446988865/Intro%20to%20Boosting.pdf</a>)</p>
 
 </div>
 </div>
@@ -701,7 +701,7 @@ Candicacy: fundamentally, we're more concerned with identifying problem students
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">ensemble</span>
 
 <span class="c1"># TODO: Initialize the three models</span>
-<span class="n">clf_A</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1e5</span><span class="p">)</span>
+<span class="n">clf_A</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">()</span>
 <span class="n">clf_B</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
 <span class="n">clf_C</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">AdaBoostClassifier</span><span class="p">()</span>
 
@@ -717,17 +717,17 @@ Candicacy: fundamentally, we're more concerned with identifying problem students
 
 <span class="c1"># TODO: Execute the &#39;train_predict&#39; function for each classifier and each training set size</span>
 <span class="c1"># train_predict(clf, X_train, y_train, X_test, y_test)</span>
-<span class="c1">#train_predict(clf_A, X_train_100, y_train_100, X_test, y_test)</span>
-<span class="c1">#train_predict(clf_A, X_train_200, y_train_200, X_test, y_test)</span>
-<span class="c1">#train_predict(clf_A, X_train_300, y_train_300, X_test, y_test)</span>
+<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 
 <span class="c1">#train_predict(clf_B, X_train_100, y_train_100, X_test, y_test)</span>
 <span class="c1">#train_predict(clf_B, X_train_200, y_train_200, X_test, y_test)</span>
 <span class="c1">#train_predict(clf_B, X_train_300, y_train_300, X_test, y_test)</span>
 
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="c1">#train_predict(clf_C, X_train_100, y_train_100, X_test, y_test)</span>
+<span class="c1">#train_predict(clf_C, X_train_200, y_train_200, X_test, y_test)</span>
+<span class="c1">#train_predict(clf_C, X_train_300, y_train_300, X_test, y_test)</span>
 </pre></div>
 
 </div>
@@ -740,24 +740,24 @@ Candicacy: fundamentally, we're more concerned with identifying problem students
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training a AdaBoostClassifier using a training set size of 100. . .
-Trained model in 0.2120 seconds
-Made predictions in 0.0070 seconds.
-F1 score for training set: 0.9624.
-Made predictions in 0.0050 seconds.
-F1 score for test set: 0.6949.
-Training a AdaBoostClassifier using a training set size of 200. . .
-Trained model in 0.1300 seconds
-Made predictions in 0.0060 seconds.
-F1 score for training set: 0.8633.
-Made predictions in 0.0070 seconds.
-F1 score for test set: 0.7647.
-Training a AdaBoostClassifier using a training set size of 300. . .
-Trained model in 0.2020 seconds
-Made predictions in 0.0090 seconds.
-F1 score for training set: 0.8578.
-Made predictions in 0.0050 seconds.
-F1 score for test set: 0.8116.
+<pre>Training a LogisticRegression using a training set size of 100. . .
+Trained model in 0.0040 seconds
+Made predictions in 0.0020 seconds.
+F1 score for training set: 0.8529.
+Made predictions in 0.0010 seconds.
+F1 score for test set: 0.7737.
+Training a LogisticRegression using a training set size of 200. . .
+Trained model in 0.0030 seconds
+Made predictions in 0.0000 seconds.
+F1 score for training set: 0.8269.
+Made predictions in 0.0000 seconds.
+F1 score for test set: 0.7857.
+Training a LogisticRegression using a training set size of 300. . .
+Trained model in 0.0050 seconds
+Made predictions in 0.0000 seconds.
+F1 score for training set: 0.8337.
+Made predictions in 0.0000 seconds.
+F1 score for test set: 0.7368.
 </pre>
 </div>
 </div>
@@ -794,24 +794,24 @@ F1 score for test set: 0.8116.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0040</td>
+<td style="text-align:center">0.1080</td>
 <td style="text-align:center">0.0000</td>
-<td style="text-align:center">0.8657</td>
-<td style="text-align:center">0.6721</td>
+<td style="text-align:center">0.8529</td>
+<td style="text-align:center">0.7737</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0040</td>
+<td style="text-align:center">0.0030</td>
 <td style="text-align:center">0.0010</td>
-<td style="text-align:center">0.8303</td>
-<td style="text-align:center">0.7259</td>
+<td style="text-align:center">0.8269</td>
+<td style="text-align:center">0.7857</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0090</td>
-<td style="text-align:center">0.0020</td>
-<td style="text-align:center">0.8322</td>
-<td style="text-align:center">0.7231</td>
+<td style="text-align:center">0.0030</td>
+<td style="text-align:center">0.0</td>
+<td style="text-align:center">0.8377</td>
+<td style="text-align:center">0.7368</td>
 </tr>
 </tbody>
 </table>
@@ -965,7 +965,7 @@ F1 score for test set: 0.8116.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
@@ -1019,7 +1019,7 @@ F1 score for test set: 0.8116.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Made predictions in 0.0010 seconds.
 Tuned model has a training F1 score of 0.8180.
-Made predictions in 0.0010 seconds.
+Made predictions in 0.0000 seconds.
 Tuned model has a testing F1 score of 0.8609.
 </pre>
 </div>
