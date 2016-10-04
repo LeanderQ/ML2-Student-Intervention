@@ -692,7 +692,7 @@ Candicacy: Per wikipedia, when decision trees are used as the weak learner, Adab
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -701,25 +701,25 @@ Candicacy: Per wikipedia, when decision trees are used as the weak learner, Adab
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">ensemble</span>
 
 <span class="c1"># TODO: Initialize the three models</span>
-<span class="n">clf_A</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">()</span>
-<span class="n">clf_B</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
-<span class="n">clf_C</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">AdaBoostClassifier</span><span class="p">()</span>
+<span class="n">clf_A</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">clf_B</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">clf_C</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">AdaBoostClassifier</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
 
 <span class="c1"># TODO: Set up the training set sizes</span>
-<span class="n">X_train_100</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
-<span class="n">y_train_100</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span>
+<span class="c1">#X_train_100 = X_train[0:100]</span>
+<span class="c1">#y_train_100 = y_train[0:100]</span>
 
-<span class="n">X_train_200</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">]</span>
-<span class="n">y_train_200</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">]</span>
+<span class="c1">#X_train_200 = X_train[0:200]</span>
+<span class="c1">#y_train_200 = y_train[0:200]</span>
 
-<span class="n">X_train_300</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">300</span><span class="p">]</span>
-<span class="n">y_train_300</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">300</span><span class="p">]</span>
+<span class="c1">#X_train_300 = X_train[0:300]</span>
+<span class="c1">#y_train_300 = y_train[0:300]</span>
 
 <span class="c1"># TODO: Execute the &#39;train_predict&#39; function for each classifier and each training set size</span>
 <span class="c1"># train_predict(clf, X_train, y_train, X_test, y_test)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="c1">#train_predict(clf_A, X_train_100, y_train_100, X_test, y_test)</span>
+<span class="c1">#train_predict(clf_A, X_train_200, y_train_200, X_test, y_test)</span>
+<span class="c1">#train_predict(clf_A, X_train_300, y_train_300, X_test, y_test)</span>
 
 <span class="c1">#train_predict(clf_B, X_train_100, y_train_100, X_test, y_test)</span>
 <span class="c1">#train_predict(clf_B, X_train_200, y_train_200, X_test, y_test)</span>
@@ -728,6 +728,12 @@ Candicacy: Per wikipedia, when decision trees are used as the weak learner, Adab
 <span class="c1">#train_predict(clf_C, X_train_100, y_train_100, X_test, y_test)</span>
 <span class="c1">#train_predict(clf_C, X_train_200, y_train_200, X_test, y_test)</span>
 <span class="c1">#train_predict(clf_C, X_train_300, y_train_300, X_test, y_test)</span>
+
+
+<span class="c1">#do it all in one loop, per Udacity reviewer email (https://review.udacity.com/#!/reviews/242567):</span>
+<span class="k">for</span> <span class="n">clf</span> <span class="ow">in</span> <span class="p">[</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">clf_B</span><span class="p">,</span> <span class="n">clf_C</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">]:</span>
+        <span class="n">train_predict</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:</span><span class="n">size</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">size</span><span class="p">],</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -741,23 +747,59 @@ Candicacy: Per wikipedia, when decision trees are used as the weak learner, Adab
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training a LogisticRegression using a training set size of 100. . .
-Trained model in 0.0040 seconds
-Made predictions in 0.0020 seconds.
+Trained model in 0.0020 seconds
+Made predictions in 0.0030 seconds.
 F1 score for training set: 0.8529.
-Made predictions in 0.0010 seconds.
+Made predictions in 0.0050 seconds.
 F1 score for test set: 0.7737.
 Training a LogisticRegression using a training set size of 200. . .
-Trained model in 0.0030 seconds
-Made predictions in 0.0000 seconds.
+Trained model in 0.0180 seconds
+Made predictions in 0.0010 seconds.
 F1 score for training set: 0.8269.
 Made predictions in 0.0000 seconds.
 F1 score for test set: 0.7857.
 Training a LogisticRegression using a training set size of 300. . .
-Trained model in 0.0050 seconds
-Made predictions in 0.0000 seconds.
+Trained model in 0.0080 seconds
+Made predictions in 0.0010 seconds.
 F1 score for training set: 0.8337.
 Made predictions in 0.0000 seconds.
 F1 score for test set: 0.7368.
+Training a DecisionTreeClassifier using a training set size of 100. . .
+Trained model in 0.0010 seconds
+Made predictions in 0.0010 seconds.
+F1 score for training set: 1.0000.
+Made predictions in 0.0010 seconds.
+F1 score for test set: 0.6435.
+Training a DecisionTreeClassifier using a training set size of 200. . .
+Trained model in 0.0030 seconds
+Made predictions in 0.0000 seconds.
+F1 score for training set: 1.0000.
+Made predictions in 0.0000 seconds.
+F1 score for test set: 0.7761.
+Training a DecisionTreeClassifier using a training set size of 300. . .
+Trained model in 0.0030 seconds
+Made predictions in 0.0000 seconds.
+F1 score for training set: 1.0000.
+Made predictions in 0.0010 seconds.
+F1 score for test set: 0.6880.
+Training a AdaBoostClassifier using a training set size of 100. . .
+Trained model in 0.0950 seconds
+Made predictions in 0.0060 seconds.
+F1 score for training set: 0.9624.
+Made predictions in 0.0050 seconds.
+F1 score for test set: 0.6949.
+Training a AdaBoostClassifier using a training set size of 200. . .
+Trained model in 0.1160 seconds
+Made predictions in 0.0050 seconds.
+F1 score for training set: 0.8633.
+Made predictions in 0.0040 seconds.
+F1 score for test set: 0.7647.
+Training a AdaBoostClassifier using a training set size of 300. . .
+Trained model in 0.0980 seconds
+Made predictions in 0.0060 seconds.
+F1 score for training set: 0.8578.
+Made predictions in 0.0030 seconds.
+F1 score for test set: 0.8116.
 </pre>
 </div>
 </div>
@@ -794,7 +836,7 @@ F1 score for test set: 0.7368.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.1080</td>
+<td style="text-align:center">0.1200</td>
 <td style="text-align:center">0.0000</td>
 <td style="text-align:center">0.8529</td>
 <td style="text-align:center">0.7737</td>
@@ -802,14 +844,14 @@ F1 score for test set: 0.7368.
 <tr>
 <td style="text-align:center">200</td>
 <td style="text-align:center">0.0030</td>
-<td style="text-align:center">0.0010</td>
+<td style="text-align:center">0.0000</td>
 <td style="text-align:center">0.8269</td>
 <td style="text-align:center">0.7857</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0030</td>
-<td style="text-align:center">0.0</td>
+<td style="text-align:center">0.0060</td>
+<td style="text-align:center">0.0010</td>
 <td style="text-align:center">0.8377</td>
 <td style="text-align:center">0.7368</td>
 </tr>
@@ -828,24 +870,24 @@ F1 score for test set: 0.7368.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0020</td>
-<td style="text-align:center">0.0000</td>
+<td style="text-align:center">0.0010</td>
+<td style="text-align:center">0.0010</td>
 <td style="text-align:center">1.0000</td>
-<td style="text-align:center">0.6333</td>
+<td style="text-align:center">0.6435</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0020</td>
+<td style="text-align:center">0.0007</td>
 <td style="text-align:center">0.0000</td>
 <td style="text-align:center">1.0000</td>
-<td style="text-align:center">0.7463</td>
+<td style="text-align:center">0.7761</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0030</td>
+<td style="text-align:center">0.0004</td>
 <td style="text-align:center">0.0010</td>
 <td style="text-align:center">1.0000</td>
-<td style="text-align:center">0.6825</td>
+<td style="text-align:center">0.6880</td>
 </tr>
 </tbody>
 </table>
@@ -862,22 +904,22 @@ F1 score for test set: 0.7368.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0910</td>
-<td style="text-align:center">0.0040</td>
+<td style="text-align:center">0.3390</td>
+<td style="text-align:center">0.0100</td>
 <td style="text-align:center">0.9624</td>
 <td style="text-align:center">0.6949</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0850</td>
-<td style="text-align:center">0.0040</td>
+<td style="text-align:center">0.2590</td>
+<td style="text-align:center">0.0050</td>
 <td style="text-align:center">0.8633</td>
 <td style="text-align:center">0.7647</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.1000</td>
-<td style="text-align:center">0.0030</td>
+<td style="text-align:center">0.1320</td>
+<td style="text-align:center">0.0050</td>
 <td style="text-align:center">0.8578</td>
 <td style="text-align:center">0.8116</td>
 </tr>
@@ -1019,7 +1061,7 @@ F1 score for test set: 0.7368.
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Made predictions in 0.0010 seconds.
 Tuned model has a training F1 score of 0.8180.
-Made predictions in 0.0000 seconds.
+Made predictions in 0.0010 seconds.
 Tuned model has a testing F1 score of 0.8609.
 </pre>
 </div>
